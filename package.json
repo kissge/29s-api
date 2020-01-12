@@ -5,8 +5,10 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "bin/29s-api",
+    "test": "echo 'test wut?' && exit 1"
   },
+  "bin": "bin/29s-api",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kissge/29s-api.git"
@@ -24,7 +26,13 @@
     "prototype",
     "mock"
   ],
+  "dependencies": {
+    "webdav-server": "^2.6.2",
+    "yargs": "^15.1.0"
+  },
   "devDependencies": {
+    "@types/node": "^13.1.6",
+    "@types/yargs": "^15.0.0",
     "prettier": "^1.19.1",
     "typescript": "^3.7.4"
   }
