@@ -1,0 +1,31 @@
+{
+  "name": "29s-api",
+  "version": "0.0.1",
+  "description": "Simple API server in less than 29 seconds",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kissge/29s-api.git"
+  },
+  "author": "Yusuke Kido <mail@yusuk.eki.do>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kissge/29s-api/issues"
+  },
+  "homepage": "https://github.com/kissge/29s-api",
+  "keywords": [
+    "server",
+    "REST",
+    "API",
+    "prototype",
+    "mock"
+  ],
+  "devDependencies": {
+    "prettier": "^1.19.1",
+    "typescript": "^3.7.4"
+  }
+}
