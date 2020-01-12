@@ -1,5 +1,7 @@
 # 29s-api
 
+[![npm version](https://badge.fury.io/js/29s-api.svg)](https://badge.fury.io/js/29s-api)
+
 Build a simple API server in less than 29 seconds.
 If you have 30 seconds, you might want to try something smarter like [typicode/json-server](https://github.com/typicode/json-server).
 
