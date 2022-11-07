@@ -1,17 +1,29 @@
 import assert from 'assert';
+import fs from 'fs';
+import express from 'express';
 import { v2 as webdav } from 'webdav-server';
-import yargs from 'yargs';
 
-const { argv } = yargs.options({
-  port: { type: 'number', alias: 'p', default: 2929 },
-  root: { type: 'string', alias: 'r', default: '.' },
-});
+/**
+ * Create a 29s-api instance.
+ * @param rootPath Path to directory, on the physical file system. Defaults to `.`.
+ * @param port Port number to listen. Defaults to `2929`.
+ * @returns A 29s-api instance
+ */
+export function create29sAPIServer(rootPath: string = '.', port: number = 2929, httpPath: string = '/') {
+  const server = new webdav.WebDAVServer();
 
-const server = new webdav.WebDAVServer({ port: argv.port });
+  server.setFileSystem('/', new webdav.PhysicalFileSystem(rootPath), assert);
 
-server.setFileSystem('/', new webdav.PhysicalFileSystem(argv.root), assert);
+  const expressServer = express();
+  const handler = webdav.extensions.express(httpPath, server);
+  expressServer.use((req, res, next) => {
+    if (fs.existsSync(rootPath + req.path) || fs.existsSync(rootPath + req.path.replace(/\/[^\/]+\/*$/, ''))) {
+      handler(req, res, next);
+    } else {
+      next();
+    }
+  });
+  expressServer.listen(port);
 
-server.start(server => {
-  assert(server);
-  console.log(`Serving ${argv.root} at port ${argv.port}`);
-});
+  return expressServer;
+}
